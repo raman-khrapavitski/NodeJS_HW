@@ -81,3 +81,4 @@ typings/
 
 #Output directory
 dist/
+.vscode/
