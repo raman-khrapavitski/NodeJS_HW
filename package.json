@@ -8,6 +8,9 @@
     "start": "npm run build && nodemon --exec babel-node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "streams": "src/utils/streams.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raman-khrapavitski/nodeJs_homework.git"
@@ -32,6 +35,7 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
+    "commander": "^2.19.0",
     "csvsync": "^1.1.0",
     "csvtojson": "^2.0.8"
   }
