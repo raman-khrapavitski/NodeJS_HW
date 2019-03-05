@@ -20,7 +20,7 @@ export default class DirWatcher extends EventEmitter {
                         files.forEach(element => {
                             this.allFiles.push(element);
                         });                        
-                        this.emit("change", this.allFiles.map(filename => path + '/' + filename));
+                        this.emit("change", this.allFiles.map(filename => `${path}/${filename}`));
                     } else {                        
                         const tempArray = new Array();
                         files.forEach(element => {
@@ -28,7 +28,7 @@ export default class DirWatcher extends EventEmitter {
                         });
                         let diff = tempArray.filter(x => !this.allFiles.includes(x));
                         this.allFiles = this.allFiles.concat(diff)                    
-                        this.emit("change", diff.map(filename => path + '/' + filename));
+                        this.emit("change", diff.map(filename => `${path}/${filename}`));
                     }
                 }
             });
