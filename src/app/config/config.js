@@ -11,19 +11,19 @@ export const userDB = {
 }
 
 export const facebookConf = {
-    FACEBOOK_APP_ID: "",
-    FACEBOOK_APP_SECRET: "",
+    FACEBOOK_APP_ID: "test",
+    FACEBOOK_APP_SECRET: "test",
     CALLBACK_URL: "http://localhost:8000/auth/facebook/callback"
 }
 
 export const twitterConf = {
-    TWITTER_CONSUMER_KEY: "",
-    TWITTER_CONSUMER_SECRET: "",
+    TWITTER_CONSUMER_KEY: "test",
+    TWITTER_CONSUMER_SECRET: "test",
     CALLBACK_URL: "http://localhost:8000/auth/twitter/callback"
 }
 
 export const googleConf = {
-    TWITTER_CONSUMER_KEY: "",
-    TWITTER_CONSUMER_SECRET: "",
+    GOOGLE_CLIENT_ID: "test",
+    GOOGLE_CLIENT_SECRET: "test",
     CALLBACK_URL: "http://localhost:8000/auth/google/callback"
 }

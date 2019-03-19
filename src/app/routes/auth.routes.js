@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { config, user } from '../config/config';
+import { config, userDB } from '../config/config';
 import passport from 'passport';
 import local from '../config/passport.local';
 import facebook from '../config/passport.facebook';
@@ -13,10 +13,10 @@ router.use(passport.initialize());
 
 router.post('/', function (request, response) {
     let userToAuth = request.body;
-    if (user.username !== userToAuth.username) {
+    if (userDB.username !== userToAuth.username) {
         response.status(404).send({ code: 404, message: 'Not found', data: `User with username - ${userToAuth.username} not found` });
     } else {
-        if (user.password !== userToAuth.password) {
+        if (userDB.password !== userToAuth.password) {
             response.status(401).send({ code: 401, message: 'Unauthorized', data: `Wrong password` });
         } else {
             let token = jwt.sign({ username: userToAuth.username }, config.secret, { expiresIn: '1h' });
