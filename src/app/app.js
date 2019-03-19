@@ -1,6 +1,6 @@
 import express from 'express';
-import queryParser from './middlewares/cookie-parser';
-import cookieParser from './middlewares/query-parser';
+import queryParser from './middlewares/cookie.parser';
+import cookieParser from './middlewares/query.parser';
 import router from './routes/index';
 
 const app = express();

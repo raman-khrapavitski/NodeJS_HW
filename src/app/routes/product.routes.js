@@ -5,12 +5,12 @@ import { reviews } from '../models/reviews';
 const router = express.Router();
 
 router.route('/')
-    .get('/', function (request, response) {
+    .get(function (request, response) {
         console.log("Cookies: ", request.parsedCookies);
         console.log("Query: ", request.parsedQuery);
         response.json(products);
     })
-    .post('/', function (request, response) {
+    .post(function (request, response) {
         console.log("Cookies: ", request.parsedCookies);
         console.log("Query: ", request.parsedQuery);
         let newProduct = request.body;
