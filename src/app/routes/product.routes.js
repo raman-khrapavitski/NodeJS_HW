@@ -1,6 +1,8 @@
 import express from 'express';
-import { products } from '../models/products';
-import { reviews } from '../models/reviews';
+import sequelize from '../data/index';
+
+const Product = sequelize.import('../data/models/product');
+const Review = sequelize.import('../data/models/review');
 
 const router = express.Router();
 
@@ -8,26 +10,37 @@ router.route('/')
     .get(function (request, response) {
         console.log("Cookies: ", request.parsedCookies);
         console.log("Query: ", request.parsedQuery);
-        response.json(products);
+        Product.findAll().then(products => {
+            console.log(`Founded products - ${products}`)
+            response.json(products);
+        });
     })
     .post(function (request, response) {
         console.log("Cookies: ", request.parsedCookies);
         console.log("Query: ", request.parsedQuery);
         let newProduct = request.body;
-        products.push(newProduct);
-        response.json(newProduct.guid);
+        Product.create(newProduct).then(() => {
+            console.log(`Proudct with id - ${newProduct.guid} created`);
+            response.json(newProduct.guid);
+        })
     });
 
 router.get('/:productId', function (request, response) {
     console.log("Cookies: ", request.parsedCookies);
     console.log("Query: ", request.parsedQuery);
-    response.json(products.find((product) => product.guid === request.params.productId));
+    Product.findByPk(request.params.productId).then(product => {
+        console.log(`Founded product - ${product}`)
+        response.json(product);
+    });
 });
 
 router.get('/:productId/reviews', function (request, response) {
     console.log("Cookies: ", request.parsedCookies);
     console.log("Query: ", request.parsedQuery);
-    response.json(reviews.filter((review) => review.productId === request.params.productId));
+    Review.findAll({where: {productId: request.params.productId}}).then(reviews => {
+        console.log(`Founded reviews - ${reviews}`)
+        response.json(reviews);
+    });    
 });
 
 export default router;
