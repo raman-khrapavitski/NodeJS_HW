@@ -1,4 +1,5 @@
 import express from 'express';
+import db from './mongo/index';
 import queryParser from './middlewares/cookie.parser';
 import cookieParser from './middlewares/query.parser';
 import router from './routes/index';
