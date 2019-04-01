@@ -1,0 +1,409 @@
+swagger: '2.0'
+info:
+  description: |
+    Api for NodeJS homework
+  version: 1.0.0
+  title: NodeJS homework 8
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: raman_khrapavitski@epam.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+- name: city
+  description: Everything about cities
+- name: product
+  description: Access to products
+- name: user
+  description: Operations about user
+paths:
+  /cities:
+    x-swagger-router-controller: city.controller
+    post:
+      tags:
+      - city
+      description: Add a new city to database 
+      operationId: addCity
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: City object that needs to be added to the database
+        required: true
+        schema:
+          $ref: '#/definitions/City'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+            example: 48adcab0-5472-11e9-8647-d663bd873d93
+    get:
+      tags:
+      - city
+      description: Get all cities from database 
+      operationId: getAllCities
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/City"
+  /cities/random:
+    x-swagger-router-controller: city.controller
+    get:
+      tags:
+      - city
+      description: Get random city from database 
+      operationId: getRandomCity
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: "#/definitions/City"
+  /cities/{cityId}:
+    x-swagger-router-controller: city.controller
+    get:
+      tags:
+      - city
+      description: Returns a single city
+      operationId: getCityById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: ID of city to return
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/City'
+    put:
+      tags:
+      - city
+      description: Update city
+      operationId: updateCityById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: ID of city to update
+        required: true
+        type: string
+        format: uuid
+      - in: body
+        name: body
+        description: City object that needs to be updated to the database
+        required: true
+        schema:
+          $ref: '#/definitions/City'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/City'
+    delete:
+      tags:
+      - city
+      description: Delete a single city
+      operationId: deleteCityById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: cityId
+        in: path
+        description: ID of city to delete
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+            example: 48adcab0-5472-11e9-8647-d663bd873d93
+  /products:
+    x-swagger-router-controller: product.controller
+    post:
+      tags:
+      - product
+      description: Add a new product to database 
+      operationId: addProduct
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Product object that needs to be added to the database
+        required: true
+        schema:
+          $ref: '#/definitions/Product'
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+            example: 48adcab0-5472-11e9-8647-d663bd873d93
+    get:
+      tags:
+      - product
+      description: Get all products from database 
+      operationId: getAllProducts
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+  /products/{productId}:
+    x-swagger-router-controller: product.controller
+    get:
+      tags:
+      - product
+      description: Returns a single product
+      operationId: getProductById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product to return
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Product'
+    delete:
+      tags:
+      - product
+      description: Delete a single product
+      operationId: deleteProductById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product to delete
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+            example: 48adcab0-5472-11e9-8647-d663bd873d9
+  /products/{productId}/reviews:
+    x-swagger-router-controller: product.controller
+    get:
+      tags:
+      - product
+      description: Returns a reviews by product id
+      operationId: getReviewsByProductId
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: productId
+        in: path
+        description: ID of product to return
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+  /users:
+    x-swagger-router-controller: user.controller
+    get:
+      tags:
+      - user
+      description: Get all users from database 
+      operationId: getAllUsers
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+  /users/{userId}:
+    x-swagger-router-controller: user.controller
+    delete:
+      tags:
+      - user
+      description: Delete a user product
+      operationId: deleteUserById
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: ID of user to delete
+        required: true
+        type: string
+        format: uuid
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: string
+            example: 48adcab0-5472-11e9-8647-d663bd873d9
+definitions:
+  User:
+    type: object
+    properties:
+      guid:
+        type: string
+        format: uuid
+        description: UUID of user
+        example: 48adcab0-5472-11e9-8647-d663bd873d93
+      age:
+        type: number
+        format: int32
+      firstName:
+        type: string
+        description: First name of user
+        example: John
+      lastName:
+        type: string
+        description: Last name of user
+        example: Donh
+      email:
+        type: string
+        format: email
+        example: john.donh@example.com
+        description: Email address of user
+      phone:
+        type: string
+        example: +12343432423
+        description: Phone number
+    required: [guid, age, firstName, lastName, email, phone]
+  City:
+    type: object
+    properties:
+      name:
+        type: string
+        description: City name
+        example: Minsk
+      contry:
+        type: string
+        description: Country name
+        example: Belarus
+      capital:
+        type: boolean
+        description: Is this city capital of country
+        example: true
+      location:
+        type: object
+        properties:
+          lat:
+            description: Latitude of city
+            type: number
+            format: float
+            example: 85.23421
+          long:
+            description: Longitude of city
+            type: number
+            format: float
+            example: 167.34123
+        required: [lat, long]
+    required: [name, contry, capital, location]
+  Product:
+    type: object
+    properties:
+      guid:
+        type: string
+        format: uuid
+        description: UUID of product
+        example: 48adcab0-5472-11e9-8647-d663bd873d93
+      isActive:
+        type: boolean
+        description: Is product active
+        example: false
+      price:
+        type: string
+        description: Price of product
+        example: $1234
+      company:
+        type: string
+        description: Comppany that provide product
+        example: Boring company
+      about:
+        type: string
+        description: Information about product
+        example: Some infomation about this boring product
+    required: [guid, isActive, price, company, about]
+  Review:
+    type: object
+    properties:
+      guid:
+        type: string
+        format: uuid
+        description: UUID of review
+        example: 48adcab0-5472-11e9-8647-d663bd873d93
+      productId:
+        type: string
+        format: uuid
+        description: Product id
+        example: 48adcab0-5472-11e9-8647-d663bd873d93
+      review:
+        type: string
+        description: Product review
+        example: Some review of some product
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+host: localhost:8081
+basePath: /api
+schemes:
+ - http
